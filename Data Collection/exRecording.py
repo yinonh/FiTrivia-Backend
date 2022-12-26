@@ -152,7 +152,7 @@ class VideoCap:
 
     def download(self):
         shutil.make_archive(str(Path.home() / "Downloads/results"), 'zip', 'result')
-        messagebox.showinfo("result.zip created in the download folder", "Success")
+        #messagebox.showinfo("result.zip created in the download folder", "Success")
         subprocess.Popen('explorer ' + str(Path.home() / "Downloads"), shell=True)
 
     def open_example(self):
@@ -174,11 +174,11 @@ class VideoCap:
     def dark_mode(self):
         container = tb.Frame(master=self.win, padding=2)
         container.grid(row=0, column=2, sticky="nsew")
-        tb.Checkbutton(master=container, bootstyle="round-toggle", command=self.click, text="dark mode",
+        tb.Checkbutton(master=container, bootstyle="round-toggle", command=self.dMode, text="dark mode",
                        state=True).grid(row=0, column=0)
         tb.Label(text="\t\t\t").grid(row=1, column=0)
 
-    def click(self):
+    def dMode(self):
         self.win._style = tb.Style(self.style)
         if self.style == 'superhero':
             self.style = 'flatly'
@@ -192,16 +192,12 @@ class VideoCap:
         self.label = tb.Label(container)
         self.label.grid(row=1, column=1)
 
-        # Get the latest frame and convert into Image
         cv2image = cv2.cvtColor(self.cap.read()[1], cv2.COLOR_BGR2RGB)
-        # win.geometry(f"{cv2image.shape[1]}x{cv2image.shape[0]}")
         img = Image.fromarray(cv2image)
-        # Convert image to PhotoImage
         imgtk = ImageTk.PhotoImage(image=img)
         self.label.imgtk = imgtk
         self.label.configure(image=imgtk)
-        # Repeat after an interval to capture continiously
-        self.label.after(5, self.image_frame)
+        self.label.after(20, self.image_frame)
 
 
 if __name__ == "__main__":
