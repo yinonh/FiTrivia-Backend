@@ -25,7 +25,7 @@ class VideoCap:
                  'squat': 'https://youtu.be/jFjgWYIB_4Y?t=21',
                  'high knees': 'https://www.youtube.com/watch?v=ZZZoCNMU48U',
                  'side stretch': 'https://youtu.be/DvJa9tiMivw?t=414',
-                 'arm circles ': 'https://youtu.be/140RTNMciH8?t=3',
+                 'arm circles': 'https://youtu.be/140RTNMciH8?t=3',
                  'stand': 'https://letmegooglethat.com/?q=%D7%A1%D7%AA%D7%9D+%D7%A1%D7%A8%D7%98%D7%95%D7%9F+%D7%A9%D7%9C%D7%9B%D7%9D+%D7%A2%D7%95%D7%9E%D7%93%D7%99%D7%9D'
                  }
 
