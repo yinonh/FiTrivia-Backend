@@ -126,8 +126,8 @@ class VideoCap:
 
                     # draw extracted pose on black white iqmage
                     mp_drawing.draw_landmarks(opImg, results.pose_landmarks, mpPose.POSE_CONNECTIONS,
-                                              mp_drawing.DrawingSpec((255, 0, 0), 2, 2),
-                                              mp_drawing.DrawingSpec((255, 0, 255), 2, 2),
+                                              mp_drawing.DrawingSpec((255, 0, 0), 1, 1),
+                                              mp_drawing.DrawingSpec((255, 0, 255), 1, 1),
                                               )
 
                     gray = cv2.cvtColor(opImg.astype('uint8'), cv2.COLOR_RGB2GRAY)
