@@ -296,5 +296,3 @@ class VideoCap:
 
 if __name__ == "__main__":
     VideoCap()
-
-
