@@ -3,6 +3,8 @@ from rest_framework.response import Response
 import cv2
 import numpy as np
 import mediapipe as mp
+import datetime
+import os
 
 mp_holistic = mp.solutions.holistic
 mp_drawing = mp.solutions.drawing_utils
@@ -10,11 +12,10 @@ mp_drawing_styles = mp.solutions.drawing_styles
 mpPose = mp.solutions.pose
 from keras.models import load_model
 
-
+NUM_OF_IMAGES = 20
 
 
 class images(APIView):
-
     model = load_model('newest model.h5')
     categories = ['jumping jacks', 'squat', 'stand', 'side stretch', 'arm circles', 'high knees']
 
@@ -69,7 +70,7 @@ class images(APIView):
         return gray
 
     def create_motion_images(self, image_arr):
-        image_arr = list(map(lambda x, i: np.where(x < 255, (len(image_arr) - i) * (255 // 10), x), image_arr,
+        image_arr = list(map(lambda x, i: np.where(x < 255, (len(image_arr) - i) * (255 // NUM_OF_IMAGES), x), image_arr,
                              [i for i in range(len(image_arr))]))
         total_image = image_arr[0]
         for i in range(1, len(image_arr)):
@@ -89,6 +90,8 @@ class images(APIView):
                 np_images.append(np_image)
         print(len(np_images))
         total_image = self.create_motion_images(np_images)
+        # output_path = os.path.join(os.getcwd(), 'assets', f'{datetime.datetime.now().strftime("%H%M%S")}.png')
+        # cv2.imwrite(output_path, total_image)
         res = self.model.predict(np.expand_dims(total_image, axis=0))[0]
         print(self.categories[np.argmax(res)])
 
